@@ -11,7 +11,13 @@ python ./USCISTracker.py
 Sample output
 
 ```
-python ./USCISTracker.py
+*********************************
+For Form I-485 received by USCIS on May 12, we found the following statistics: 
+total number of I-485 application received: 17
+Case Was Approved: 0
+Fingerprint Fee Was Received 17
+Case Was Rejected 0
+
 ```
 
 
