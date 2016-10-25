@@ -1,5 +1,5 @@
 # USCISTracker
-Wondering how fast is USCIS processing your application (Green Card, H1B, OPT, etc.)? This python script issues queries to [USCIS check my status webpage] 
+Wondering how fast USCIS is processing your application (Green Card, H1B, OPT, etc.)? This python script issues queries to [USCIS check my status webpage] 
 (https://egov.uscis.gov/casestatus/landing.do) to give you statistics of applications that was received on dates that you specify.
 
 # Usage
