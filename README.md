@@ -18,3 +18,7 @@ Modify the following parameters in the script to tailor to your needs.
 **mycaseNum**: Your Application Number
 
 **numRange**: number of neighboring receipts to check
+
+
+# Disclaimer
+The author claims no legal responsibility for misuage of this script. User is advised not to spam USCIS website by setting **numRange** small.
