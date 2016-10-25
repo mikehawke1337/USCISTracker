@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import re 
+import re
+from bs4 import BeautifulSoup
 from mechanize import Browser
 br = Browser()
 
@@ -9,25 +10,21 @@ br.set_handle_robots( False )
 # Google demands a user-agent that isn't a robot
 br.addheaders = [('User-agent', 'Firefox')]
 
-# Retrieve the Google home page, saving the response
+# Retrieve USCIS website
 br.open( "http://egov.uscis.gov/casestatus/landing.do" )
 
-# Select the search box and search for 'foo'
+# Select the form
 br.select_form( 'caseStatusForm' )
-print br.form
-br.form[ 'case' ] = 'foo'
+# print br.form
+br.form["appReceiptNum"] = 'LIN1690654088'
 
-# Get the search results
+# Get the response
 br.submit()
 
-# Find the link to foofighters.com; why did we run a search?
-resp = None
-for link in br.links():
-    siteMatch = re.compile( 'www.foofighters.com' ).search( link.url )
-    if siteMatch:
-        resp = br.follow_link( link )
-        break
+html = br.response().read()
+soup = BeautifulSoup(html, 'html.parser')
+#print soup.prettify()
 
-# Print the site
-content = resp.get_data()
-print content
+for div in soup.findAll('div', {'class': 'current-status-sec'}):
+  print div.text
+
