@@ -8,7 +8,11 @@ The current version checks a range of neighboring receipt numbers around your ap
 ```python
 python ./USCISTracker.py
 ```
+Sample output
 
+```
+python ./USCISTracker.py
+```
 
 
 Modify the following parameters in the script to tailor to your needs.
