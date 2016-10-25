@@ -21,4 +21,4 @@ Modify the following parameters in the script to tailor to your needs.
 
 
 # Disclaimer
-The author claims no legal responsibility for misuage of this script. User is advised not to spam USCIS website by setting **numRange** small.
+The author claims no legal responsibility for misuage of this script. User is advised to not spam USCIS website by setting **numRange** small.
