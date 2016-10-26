@@ -10,7 +10,7 @@ br = Browser()
 
 myCaseNum = 1690654088
 formType = 'Form I-485'
-numRange = 1500
+numRange = 2500
 dataBase = {}
 visited = {}
 
@@ -51,7 +51,7 @@ for n in range (0-numRange, numRange):
           dataBase[receiptNum] = 'Fingerprint Fee Was Received'
         elif 'Case Was Approved' in status.text:
           dataBase[receiptNum] = 'Case Was Approved'
-        elif 'Case Was Rejected' in status.text:
+        elif any (deny in status.text for deny in ['Case Was Rejected', 'Decision Notice Mailed']):
           dataBase[receiptNum] = 'Case Rejected'
         elif 'Case Was Received' in status.text:
           dataBase[receiptNum] = 'Case Received'
@@ -99,16 +99,16 @@ with open('data.txt', 'w') as outfile:
 with open('visited.txt', 'w') as outfile:
   json.dump(visited, outfile)
 
-
+template = '{0:45}{1:5}'
 # Print final statistics
 print '*********************************'
-print 'For ' + formType + ', ' + str(2*numRange) + ' neighbors of LIN' + str(myCaseNum) +', we found the following statistics: '
-print 'total number of I-485 application received: ' + str(numTotalCase)
-print 'Case Was Approved: ' + str(numApproved)
-print 'Fingerprint Fee Was Received ' + str(numFPReceived)
-print 'Case Was Rejected ' + str(numRejected)
-print 'Case Was Received ' + str(numReceived)
-print 'Case Was Ready for Interview ' + str(numInterview)
-print 'Case is RFE ' + str(numRFE)
-print 'Case Was Transferred ' + str(numTransfer)
-print 'Name Was Updated ' + str(numNameUpdated)
+print 'For ' + str(2*numRange) + ' neighbors of LIN' + str(myCaseNum) +', we found the following statistics: '
+print template.format('total number of I-485 application received: ', str(numTotalCase))
+print template.format('Case Was Approved: ', str(numApproved))
+print template.format('Fingerprint Fee Was Received: ', str(numFPReceived))
+print template.format('Case Was Rejected: ', str(numRejected))
+print template.format('Case Was Received: ', str(numReceived))
+print template.format('Case Was Ready for Interview: ', str(numInterview))
+print template.format('Case is RFE: ', str(numRFE))
+print template.format('Case Was Transferred: ', str(numTransfer))
+print template.format('Name Was Updated: ', str(numNameUpdated))
