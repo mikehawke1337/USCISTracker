@@ -12,18 +12,21 @@ Sample output
 
 ```
 *********************************
-For Form I-485 received by USCIS on May 12, we found the following statistics: 
-total number of I-485 application received: 17
-Case Was Approved: 0
-Fingerprint Fee Was Received 17
-Case Was Rejected 0
+For 5000 neighbors of LIN1690654088, we found the following statistics: 
+total number of I-485 application received:  337  
+Case Was Approved:                           27   
+Fingerprint Fee Was Received:                150  
+Case Was Rejected:                           14   
+Case Was Received:                           91   
+Case Was Ready for Interview:                7    
+Case is RFE:                                 32   
+Case Was Transferred:                        3    
+Name Was Updated:                            13  
 
 ```
 
 
 Modify the following parameters in the script to tailor to your needs.
-
-**date**: Application receipt date
 
 **mycaseNum**: Your Application Number
 
