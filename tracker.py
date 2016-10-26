@@ -9,9 +9,8 @@ br = Browser()
 
 
 myCaseNum = 1690654088
-date = 'May 12'
 formType = 'Form I-485'
-numRange = 400
+numRange = 1500
 dataBase = {}
 visited = {}
 
@@ -45,7 +44,7 @@ for n in range (0-numRange, numRange):
 
     # get current case status
     for status in soup.findAll('div', {'class': 'rows text-center'}):
-      if all (keyWord in status.text for keyWord in [formType, date]):
+      if all (keyWord in status.text for keyWord in [formType]):
         print(status.text)
         receiptNum = re.search('LIN(\d+)', status.text).group(1)
         if 'Fingerprint Fee Was Received' in status.text:
@@ -54,12 +53,26 @@ for n in range (0-numRange, numRange):
           dataBase[receiptNum] = 'Case Was Approved'
         elif 'Case Was Rejected' in status.text:
           dataBase[receiptNum] = 'Case Rejected'
-
+        elif 'Case Was Received' in status.text:
+          dataBase[receiptNum] = 'Case Received'
+        elif 'Case Is Ready To Be Scheduled For An Interview' in status.text:
+          dataBase[receiptNum] = 'Ready for Interview'
+        elif any (RFE in status.text for RFE in ['Request for Additional Evidence Was Mailed', 'Request For Evidence Was Received']):
+          dataBase[receiptNum] = 'RFE'
+        elif 'Case Was Transferred' in status.text:
+          dataBase[receiptNum] = 'Case Transferred'
+        elif 'Name Was Updated' in status.text:
+          dataBase[receiptNum] = 'Name Updated'
 
 numTotalCase = 0
 numApproved = 0
 numRejected = 0
 numFPReceived = 0
+numReceived = 0
+numInterview = 0
+numRFE = 0
+numTransfer = 0
+numNameUpdated = 0
 
 for case in dataBase:
   numTotalCase += 1
@@ -69,6 +82,16 @@ for case in dataBase:
     numApproved += 1
   elif dataBase[case]=='Case Rejected':
     numRejected += 1
+  elif dataBase[case]=='Case Received':
+    numReceived += 1
+  elif dataBase[case]=='Ready for Interview':
+    numInterview += 1
+  elif dataBase[case]=='RFE':
+    numRFE += 1
+  elif dataBase[case]=='Case Transferred':
+    numTransfer += 1
+  elif dataBase[case]=='Name Updated':
+    numNameUpdated += 1
 
 # store data
 with open('data.txt', 'w') as outfile:
@@ -79,9 +102,13 @@ with open('visited.txt', 'w') as outfile:
 
 # Print final statistics
 print '*********************************'
-print 'For ' + formType + ' received by USCIS on ' + date + ', we found the following statistics: '
+print 'For ' + formType + ', ' + str(2*numRange) + ' neighbors of LIN' + str(myCaseNum) +', we found the following statistics: '
 print 'total number of I-485 application received: ' + str(numTotalCase)
 print 'Case Was Approved: ' + str(numApproved)
 print 'Fingerprint Fee Was Received ' + str(numFPReceived)
 print 'Case Was Rejected ' + str(numRejected)
-
+print 'Case Was Received ' + str(numReceived)
+print 'Case Was Ready for Interview ' + str(numInterview)
+print 'Case is RFE ' + str(numRFE)
+print 'Case Was Transferred ' + str(numTransfer)
+print 'Name Was Updated ' + str(numNameUpdated)
