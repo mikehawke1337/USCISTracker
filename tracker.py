@@ -13,6 +13,7 @@ date = 'May 12'
 formType = 'Form I-485'
 numRange = 400
 dataBase = {}
+visited = {}
 
 # Ignore robots.txt
 br.set_handle_robots( False )
@@ -21,11 +22,14 @@ br.addheaders = [('User-agent', 'Firefox')]
 
 with open('data.txt') as infile:
   dataBase = json.load(infile)
+with open('visited.txt') as infile:
+  visited = json.load(infile)
 
 # query USCIS check my case webpage
 for n in range (0-numRange, numRange):
   caseNum = str(myCaseNum + n)
-  if caseNum not in dataBase:
+  if caseNum not in visited:
+    visited[caseNum] = 'visited'
     # Retrieve USCIS website
     br.open( "http://egov.uscis.gov/casestatus/landing.do" )
     # Select the form
@@ -48,7 +52,7 @@ for n in range (0-numRange, numRange):
           dataBase[receiptNum] = 'Fingerprint Fee Was Received'
         elif 'Case Was Approved' in status.text:
           dataBase[receiptNum] = 'Case Was Approved'
-        elif 'Case Rejected' in status.text:
+        elif 'Case Was Rejected' in status.text:
           dataBase[receiptNum] = 'Case Rejected'
 
 
@@ -69,6 +73,8 @@ for case in dataBase:
 # store data
 with open('data.txt', 'w') as outfile:
   json.dump(dataBase, outfile)
+with open('visited.txt', 'w') as outfile:
+  json.dump(visited, outfile)
 
 
 # Print final statistics
