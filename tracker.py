@@ -5,12 +5,13 @@ import json
 from pprint import pprint
 from bs4 import BeautifulSoup
 from mechanize import Browser
+import os.path
 br = Browser()
 
 
 myCaseNum = 1690654088
 formType = 'Form I-485'
-numRange = 2500
+numRange = 400
 dataBase = {}
 visited = {}
 
@@ -19,10 +20,12 @@ br.set_handle_robots( False )
 # Google demands a user-agent that isn't a robot
 br.addheaders = [('User-agent', 'Firefox')]
 
-with open('data.txt') as infile:
-  dataBase = json.load(infile)
-with open('visited.txt') as infile:
-  visited = json.load(infile)
+if os.path.isfile('data.txt'):
+  with open('data.txt') as infile:
+    dataBase = json.load(infile)
+if os.path.isfile('visited.txt'):
+  with open('visited.txt') as infile:
+    visited = json.load(infile)
 
 # query USCIS check my case webpage
 for n in range (0-numRange, numRange):
