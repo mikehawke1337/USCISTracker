@@ -1,3 +1,5 @@
+Very minor changes from https://github.com/hkustliqi/USCISTracker to run case updates in 2020
+
 # USCISTracker
 Wondering how fast USCIS is processing your application (Green Card, H1B, OPT, etc.)? This python script issues queries to [USCIS check my status webpage] 
 (https://egov.uscis.gov/casestatus/landing.do) to give you statistics of applications that was received on dates that you specify.
@@ -27,6 +29,8 @@ Name Was Updated:                            13
 
 
 Modify the following parameters in the script to tailor to your needs.
+
+**mySC**: Service Center code (MSC = National Benefits Center etc.)
 
 **mycaseNum**: Your Application Number
 
