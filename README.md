@@ -1,4 +1,5 @@
-Very minor changes from https://github.com/hkustliqi/USCISTracker to run case updates in 2020
+Very minor changes from https://github.com/hkustliqi/USCISTracker to run case updates in 2020.
+
 I'm not a coder, my stuff is not elegant.
 
 # USCISTracker
@@ -6,8 +7,10 @@ Wondering how fast USCIS is processing your application (Green Card, H1B, OPT, e
 (https://egov.uscis.gov/casestatus/landing.do) to give you statistics of applications that was received on dates that you specify.
 
 # Usage
-The current version checks a range of neighboring receipt numbers around your application. The script is simply invoked by running
+The current version checks a range of neighboring receipt numbers around your application. The script is simply invoked by running.
+
 A re-run of the script does not check cases again which are not the right form (I-485 by default) and does not update finally adjudicated cases (approved or rejected)
+
 This will keep your requests to USCIS to a minimum.
 
 ```python
